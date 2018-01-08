@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ValidationComponent from './ValidationComponent/ValidationComponent.js'
+import ValidationComponent from './ValidationComponent/ValidationComponent.js';
+import CharComponent from './CharComponent/CharComponent.js';
 import './App.css';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
           {this.state.length}
         </p>
         <ValidationComponent value={this.state.length}/>
+        <CharComponent/>
       </div>
     );
   }
