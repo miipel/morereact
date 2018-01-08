@@ -20,6 +20,12 @@ class App extends Component {
     })
   }
 
+  deleteCharHandler = (index) => {
+    const textInputCopy = [...this.state.textInput];
+    textInputCopy.splice(index, 1);
+    this.setState({ textInput: textInputCopy });
+  }
+
   render() {
     return (
       <div className="App">
@@ -33,8 +39,8 @@ class App extends Component {
         <ValidationComponent length={this.state.length} />
 
         {this.state.textInput.map((char, index) => {
-
           return <CharComponent
+            click={() => this.deleteCharHandler(index)}
             char={this.state.textInput[index]}
             key={index} />
         })}
