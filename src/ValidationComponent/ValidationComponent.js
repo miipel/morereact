@@ -1,7 +1,7 @@
 import React from 'react';
 
 const validationComponent = ( props ) => {
-    const length = props.value;
+    const length = props.length;
 
     return (
         <div>

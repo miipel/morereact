@@ -5,15 +5,18 @@ import './App.css';
 
 class App extends Component {
   state = {
-    length: 0
+    length: 0,
+    textInput: []
   }
 
 
-  textChangedHandler = ( event ) => {
+  textChangedHandler = (event) => {
     const input = event.target.value;
     const textLength = input.length;
+    const charArray = input.split('');
     this.setState({
-      length: textLength
+      length: textLength,
+      textInput: charArray
     })
   }
 
@@ -27,8 +30,14 @@ class App extends Component {
         <p>
           {this.state.length}
         </p>
-        <ValidationComponent value={this.state.length}/>
-        <CharComponent/>
+        <ValidationComponent length={this.state.length} />
+
+        {this.state.textInput.map((char, index) => {
+
+          return <CharComponent
+            char={this.state.textInput[index]}
+            key={index} />
+        })}
       </div>
     );
   }
