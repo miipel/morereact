@@ -6,44 +6,46 @@ import './App.css';
 class App extends Component {
   state = {
     length: 0,
-    textInput: []
+    textInput: ''
   }
 
 
   textChangedHandler = (event) => {
     const input = event.target.value;
     const textLength = input.length;
-    const charArray = input.split('');
     this.setState({
       length: textLength,
-      textInput: charArray
+      textInput: input
     })
   }
 
   deleteCharHandler = (index) => {
-    const textInputCopy = [...this.state.textInput];
-    textInputCopy.splice(index, 1);
-    this.setState({ textInput: textInputCopy });
+    const text = this.state.textInput.split('');
+    text.splice(index, 1);
+    const newText = text.join('');
+    this.setState({ textInput: newText });
   }
 
   render() {
+    const charList = this.state.textInput.split('').map((char, index) => {
+      return <CharComponent
+        key={index}
+        click={() => this.deleteCharHandler(index)}
+        character={char} />
+    });
+
     return (
       <div className="App">
         <input
           type="text"
           onChange={this.textChangedHandler}
+          value={this.state.textInput}
         />
         <p>
           {this.state.length}
         </p>
         <ValidationComponent length={this.state.length} />
-
-        {this.state.textInput.map((char, index) => {
-          return <CharComponent
-            click={() => this.deleteCharHandler(index)}
-            char={this.state.textInput[index]}
-            key={index} />
-        })}
+        {charList}
       </div>
     );
   }
